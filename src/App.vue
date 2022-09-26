@@ -1,9 +1,7 @@
 <template>
-  <main>
-    <section>
-      <h1>Hello!</h1>
-    </section>
-  </main>
+  <section>
+    <h1>Hello!</h1>
+  </section>
 </template>
 
 <script setup></script>
