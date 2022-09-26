@@ -8,17 +8,11 @@
       >
         <BookmarkIcon />
       </button>
-      <button
-        type="button"
-        class="documents-tools__button documents-tools__button--action"
-      >
+      <button type="button" class="documents-tools__button">
         <PlusIcon />
         Новый тип
       </button>
-      <button
-        type="button"
-        class="documents-tools__button documents-tools__button--action"
-      >
+      <button type="button" class="documents-tools__button">
         <PlusIcon />
         Новый документ
       </button>
