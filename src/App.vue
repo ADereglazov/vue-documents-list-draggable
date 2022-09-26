@@ -1,7 +1,7 @@
 <template>
-  <section>
-    <h1>Hello!</h1>
-  </section>
+  <DocumentsTools />
 </template>
 
-<script setup></script>
+<script setup>
+import DocumentsTools from "@/components/DocumentsTools.vue";
+</script>
