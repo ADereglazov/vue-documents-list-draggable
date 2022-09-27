@@ -8,7 +8,7 @@
       placeholder="Поиск"
     />
     <button
-      v-show="searchString.length > 0"
+      v-show="searchString"
       class="search-input__button"
       type="button"
       @click="onClickClear"
