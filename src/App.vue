@@ -1,15 +1,22 @@
 <template>
-  <DocumentsTools class="app-documents-tools" />
-  <SearchInput class="app-search-input" />
+  <MainTools class="app-main-tools" />
+  <section>
+    <h2 class="visually-hidden">Операции со списком документов</h2>
+    <SearchInput class="app-search-input" />
+    <DocumentsListCategory />
+    <DocumentsList />
+  </section>
 </template>
 
 <script setup>
-import DocumentsTools from "@/components/DocumentsTools.vue";
+import MainTools from "@/components/MainTools.vue";
 import SearchInput from "@/components/SearchInput.vue";
+import DocumentsListCategory from "@/components/DocumentsListCategory.vue";
+import DocumentsList from "@/components/DocumentsList.vue";
 </script>
 
 <style scoped>
-.app-documents-tools {
+.app-main-tools {
   margin-bottom: 30px;
 }
 

@@ -1,18 +1,18 @@
 <template>
-  <section class="documents-tools">
-    <h1 class="documents-tools__title">Документы</h1>
-    <div class="documents-tools__wrapper-buttons">
+  <section class="main-tools">
+    <h1 class="main-tools__title">Документы</h1>
+    <div class="main-tools__wrapper-buttons">
       <button
         type="button"
-        class="documents-tools__button documents-tools__button--bookmark"
+        class="main-tools__button main-tools__button--bookmark"
       >
         <BookmarkIcon />
       </button>
-      <button type="button" class="documents-tools__button">
+      <button type="button" class="main-tools__button">
         <PlusIcon />
         Новый тип
       </button>
-      <button type="button" class="documents-tools__button">
+      <button type="button" class="main-tools__button">
         <PlusIcon />
         Новый документ
       </button>
@@ -25,13 +25,13 @@ import BookmarkIcon from "@/assets/icons/bookmark.svg";
 import PlusIcon from "@/assets/icons/plus.svg";
 
 export default {
-  name: "DocumentsTools",
+  name: "MainTools",
   components: { BookmarkIcon, PlusIcon },
 };
 </script>
 
 <style scoped lang="less">
-.documents-tools {
+.main-tools {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -54,7 +54,7 @@ export default {
     min-height: 30px;
     padding: 8px 20px 8px 35px;
 
-    background: white;
+    background: #ffffff;
     border: 1px solid #d3d8df;
     border-radius: 15px;
 
@@ -77,6 +77,7 @@ export default {
       top: 50%;
       left: 10px;
       transform: translateY(-50%);
+      display: block;
     }
 
     &--bookmark {

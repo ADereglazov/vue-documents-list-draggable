@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import ClearIcon from "@/assets/icons/clear.svg";
 import { ref } from "vue";
+import ClearIcon from "@/assets/icons/clear.svg";
 
 export default {
   name: "SearchInput",
