@@ -1,28 +1,38 @@
 <template>
-  <ul class="documents-list">
-    <li v-for="item in list" :key="item.title" class="documents-list__item">
-      <h4 class="documents-list__item-title">{{ item.title }}</h4>
-      <ColorIndicators
-        :list="item.indicators"
-        class="documents-list__item-indicators"
-      />
-      <p v-if="item.required" class="documents-list__item-required">
-        Обязательный
-      </p>
-      <p class="documents-list__item-comment">{{ item.comment }}</p>
-      <DocumentsListTools />
-    </li>
-  </ul>
+  <Draggable
+    v-model="list"
+    v-bind="dragOptions"
+    item-key="title"
+    handle=".handle"
+    tag="ul"
+    class="documents-list"
+  >
+    <template #item="{ element }">
+      <li class="documents-list__item">
+        <h4 class="documents-list__item-title">{{ element.title }}</h4>
+        <ColorIndicators
+          :list="element.indicators"
+          class="documents-list__item-indicators"
+        />
+        <p v-if="element.required" class="documents-list__item-required">
+          Обязательный
+        </p>
+        <p class="documents-list__item-comment">{{ element.comment }}</p>
+        <DocumentsListTools />
+      </li>
+    </template>
+  </Draggable>
 </template>
 
 <script>
 import { ref } from "vue";
+import Draggable from "vuedraggable";
 import ColorIndicators from "@/components/ColorIndicators.vue";
 import DocumentsListTools from "@/components/DocumentsListTools.vue";
 
 export default {
   name: "DocumentsList",
-  components: { ColorIndicators, DocumentsListTools },
+  components: { Draggable, ColorIndicators, DocumentsListTools },
   setup() {
     const list = ref([
       {
@@ -41,8 +51,15 @@ export default {
       { title: "Мед. книжка", comment: "", indicators: [], required: false },
     ]);
 
+    const dragOptions = ref({
+      animation: 200,
+      disabled: false,
+      ghostClass: "ghost",
+    });
+
     return {
       list,
+      dragOptions,
     };
   },
 };
@@ -50,7 +67,7 @@ export default {
 
 <style scoped lang="less">
 .documents-list {
-  padding: 0;
+  padding: 15px 0 0 0;
   margin: 0;
   list-style: none;
 
@@ -59,8 +76,13 @@ export default {
     align-items: center;
     height: 35px;
     padding: 0 16px;
+    margin-top: -1px;
     border: 1px solid #dfe4ef;
     background-color: #ffffff;
+
+    &.ghost {
+      opacity: 0.2;
+    }
   }
 
   &__item-title {

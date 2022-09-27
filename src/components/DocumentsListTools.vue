@@ -6,10 +6,7 @@
     <button class="documents-list-tools__button" type="button">
       <DeleteIcon />
     </button>
-    <button
-      class="documents-list-tools__button documents-list-tools__button--move"
-      type="button"
-    >
+    <button class="documents-list-tools__button handle" type="button">
       <MoveIcon />
     </button>
   </div>
@@ -44,13 +41,13 @@ export default {
     }
   }
 
-  &__button--move:active {
-    opacity: 1;
-    color: #0066ff;
-  }
-
   &__button + &__button {
     margin-left: 22px;
   }
+}
+
+.handle:active {
+  opacity: 1;
+  color: #0066ff;
 }
 </style>
