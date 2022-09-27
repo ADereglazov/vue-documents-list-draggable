@@ -56,9 +56,9 @@ export default {
     height: 22px;
     padding: 0;
     margin-right: 15px;
-    background: #ffffff;
     border: 1px solid #d3d8df;
     border-radius: 50%;
+    background: #ffffff;
     cursor: pointer;
 
     svg {

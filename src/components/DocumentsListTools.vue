@@ -35,6 +35,7 @@ export default {
     padding: 0;
     border: none;
     background: none;
+
     color: #8e9cbb;
     cursor: pointer;
 

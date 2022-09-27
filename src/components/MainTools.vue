@@ -38,6 +38,7 @@ export default {
 
   &__title {
     margin: 0;
+
     font-size: 22px;
     font-weight: 500;
     line-height: normal;
@@ -63,8 +64,10 @@ export default {
     line-height: 12px;
 
     cursor: pointer;
+    outline: none;
 
-    &:hover {
+    &:hover,
+    &:focus {
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     }
 
@@ -77,6 +80,7 @@ export default {
       top: 50%;
       left: 10px;
       transform: translateY(-50%);
+
       display: block;
     }
 
