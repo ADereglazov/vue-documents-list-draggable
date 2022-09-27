@@ -6,6 +6,9 @@
         :list="item.indicators"
         class="documents-list__item-indicators"
       />
+      <p v-if="item.required" class="documents-list__item-required">
+        Обязательный
+      </p>
       <p class="documents-list__item-comment">{{ item.comment }}</p>
       <DocumentsListTools />
     </li>
@@ -27,9 +30,15 @@ export default {
         comment:
           "Россия, Белоруссия, Украина, администратор филиала, повар-сушист, повар-пиццмейкер, повар горячего цеха",
         indicators: ["#0066ff", "#8e9cbb"],
+        required: false,
       },
-      { title: "Трудовой договор", comment: "", indicators: [] },
-      { title: "Мед. книжка", comment: "", indicators: [] },
+      {
+        title: "Трудовой договор",
+        comment: "",
+        indicators: [],
+        required: false,
+      },
+      { title: "Мед. книжка", comment: "", indicators: [], required: false },
     ]);
 
     return {
@@ -63,6 +72,13 @@ export default {
 
   &__item-indicators {
     margin-right: 15px;
+  }
+
+  &__item-required {
+    margin-right: 15px;
+    font-size: 11px;
+    font-weight: 400;
+    color: #ff238d;
   }
 
   &__item-comment {
