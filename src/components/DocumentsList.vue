@@ -1,11 +1,12 @@
 <template>
   <Draggable
-    v-model="list"
+    v-model="listModel"
     v-bind="dragOptions"
     item-key="title"
     handle=".handle"
     tag="ul"
     class="documents-list"
+    @update="onUpdate"
   >
     <template #item="{ element }">
       <li class="documents-list__item">
@@ -33,33 +34,28 @@ import DocumentsListTools from "@/components/DocumentsListTools.vue";
 export default {
   name: "DocumentsList",
   components: { Draggable, ColorIndicators, DocumentsListTools },
-  setup() {
-    const list = ref([
-      {
-        title: "Тестовое задание кандидата",
-        comment:
-          "Россия, Белоруссия, Украина, администратор филиала, повар-сушист, повар-пиццмейкер, повар горячего цеха",
-        indicators: ["#0066ff", "#8e9cbb"],
-        required: false,
-      },
-      {
-        title: "Трудовой договор",
-        comment: "",
-        indicators: [],
-        required: false,
-      },
-      { title: "Мед. книжка", comment: "", indicators: [], required: false },
-    ]);
-
-    const dragOptions = ref({
+  emits: ["changeDocList"],
+  props: {
+    list: {
+      type: Array,
+    },
+  },
+  setup(props, { emit }) {
+    const listModel = ref([...props.list]);
+    const dragOptions = {
       animation: 200,
       disabled: false,
       ghostClass: "ghost",
-    });
+    };
+
+    function onUpdate() {
+      emit("changeDocList", listModel.value);
+    }
 
     return {
-      list,
+      listModel,
       dragOptions,
+      onUpdate,
     };
   },
 };
