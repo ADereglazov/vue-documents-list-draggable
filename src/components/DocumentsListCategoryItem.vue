@@ -60,6 +60,7 @@ export default {
     }
 
     function onChangeDocumentsList(e) {
+      opened.value = true;
       emit("changeDocList", e);
     }
 
