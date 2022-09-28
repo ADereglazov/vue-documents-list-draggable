@@ -6,16 +6,18 @@
     handle=".handle"
     tag="ul"
     class="documents-list-category"
-    @update="onUpdate"
   >
-    <template #item="{ element }">
-      <DocumentsListCategoryItem :element="element" />
+    <template #item="{ element, index }">
+      <DocumentsListCategoryItem
+        :element="element"
+        @change-doc-list="onChangeDocumentsList($event, index)"
+      />
     </template>
   </Draggable>
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed } from "vue";
 import Draggable from "vuedraggable";
 import DocumentsListCategoryItem from "@/components/DocumentsListCategoryItem.vue";
 
@@ -29,21 +31,25 @@ export default {
     },
   },
   setup(props, { emit }) {
-    const listModel = ref([...props.list]);
     const dragOptions = {
       animation: 200,
       disabled: false,
       ghostClass: "ghost",
     };
 
-    function onUpdate() {
-      emit("changeDocListCategory", listModel.value);
+    const listModel = computed({
+      get: () => [...props.list],
+      set: (val) => emit("changeDocListCategory", val),
+    });
+
+    function onChangeDocumentsList(e, index) {
+      listModel.value[index].documents = [...e];
     }
 
     return {
       listModel,
       dragOptions,
-      onUpdate,
+      onChangeDocumentsList,
     };
   },
 };

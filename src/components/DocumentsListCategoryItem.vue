@@ -24,7 +24,9 @@
     </div>
     <DocumentsList
       :list="element.documents"
+      :collapse="!opened"
       class="documents-list-category-item__documents-list"
+      @change-doc-list="onChangeDocumentsList"
     />
   </li>
 </template>
@@ -44,21 +46,27 @@ export default {
     ColorIndicators,
     DocumentsList,
   },
+  emits: ["changeDocList"],
   props: {
     element: {
       type: Object,
     },
   },
-  setup() {
+  setup(prop, { emit }) {
     const opened = ref(false);
 
     function onClick() {
       opened.value = !opened.value;
     }
 
+    function onChangeDocumentsList(e) {
+      emit("changeDocList", e);
+    }
+
     return {
       opened,
       onClick,
+      onChangeDocumentsList,
     };
   },
 };

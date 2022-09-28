@@ -7,10 +7,12 @@
     handle=".handle"
     tag="ul"
     class="documents-list"
-    @update="onUpdate"
   >
     <template #item="{ element }">
-      <li class="documents-list__item">
+      <li
+        :class="{ 'documents-list__item--collapsed': collapse }"
+        class="documents-list__item"
+      >
         <h4 class="documents-list__item-title">{{ element.title }}</h4>
         <ColorIndicators
           :list="element.indicators"
@@ -27,7 +29,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed } from "vue";
 import Draggable from "vuedraggable";
 import ColorIndicators from "@/components/ColorIndicators.vue";
 import DocumentsListTools from "@/components/DocumentsListTools.vue";
@@ -40,23 +42,26 @@ export default {
     list: {
       type: Array,
     },
+    collapse: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props, { emit }) {
-    const listModel = ref([...props.list]);
     const dragOptions = {
       animation: 200,
       disabled: false,
       ghostClass: "ghost",
     };
 
-    function onUpdate() {
-      emit("changeDocList", listModel.value);
-    }
+    const listModel = computed({
+      get: () => [...props.list],
+      set: (val) => emit("changeDocList", val),
+    });
 
     return {
       listModel,
       dragOptions,
-      onUpdate,
     };
   },
 };
@@ -76,6 +81,10 @@ export default {
     margin-top: -1px;
     border: 1px solid #dfe4ef;
     background-color: #ffffff;
+
+    &--collapsed {
+      display: none;
+    }
 
     &.ghost {
       opacity: 0.2;
