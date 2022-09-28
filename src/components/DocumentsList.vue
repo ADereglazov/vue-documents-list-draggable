@@ -63,7 +63,7 @@ export default {
 
 <style scoped lang="less">
 .documents-list {
-  padding: 15px 0 0 0;
+  padding: 0;
   margin: 0;
   list-style: none;
 

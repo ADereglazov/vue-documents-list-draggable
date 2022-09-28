@@ -1,24 +1,32 @@
 <template>
   <li class="documents-list-category-item">
-    <button
-      class="documents-list-category-item__button"
-      :class="{ 'documents-list-category-item__button--opened': opened }"
-      type="button"
-      @click="opened = !opened"
-    >
-      <CollapseIcon />
-    </button>
+    <div class="documents-list-category-item__wrapper">
+      <button
+        class="documents-list-category-item__button"
+        :class="{ 'documents-list-category-item__button--opened': opened }"
+        type="button"
+        :disabled="!element.documents.length"
+        @click="onClick"
+      >
+        <CollapseIcon />
+      </button>
 
-    <h3 class="documents-list-category-item__title">{{ element.title }}</h3>
-    <ColorIndicators
-      :list="element.indicators"
-      class="documents-list-category-item__indicators"
+      <h3 class="documents-list-category-item__title">{{ element.title }}</h3>
+      <ColorIndicators
+        :list="element.indicators"
+        class="documents-list-category-item__indicators"
+      />
+      <p class="documents-list-category-item__comment">
+        {{ element.comment }}
+      </p>
+
+      <DocumentsListTools />
+    </div>
+    <DocumentsList
+      v-show="opened"
+      :list="element.documents"
+      class="documents-list-category-item__documents-list"
     />
-    <p class="documents-list-category-item__comment">
-      {{ element.comment }}
-    </p>
-
-    <DocumentsListTools />
   </li>
 </template>
 
@@ -27,10 +35,16 @@ import { ref } from "vue";
 import DocumentsListTools from "@/components/DocumentsListTools.vue";
 import ColorIndicators from "@/components/ColorIndicators.vue";
 import CollapseIcon from "@/assets/icons/collapse.svg";
+import DocumentsList from "@/components/DocumentsList.vue";
 
 export default {
   name: "DocumentsListCategoryItem",
-  components: { DocumentsListTools, CollapseIcon, ColorIndicators },
+  components: {
+    DocumentsListTools,
+    CollapseIcon,
+    ColorIndicators,
+    DocumentsList,
+  },
   props: {
     element: {
       type: Object,
@@ -39,8 +53,13 @@ export default {
   setup() {
     const opened = ref(false);
 
+    function onClick() {
+      opened.value = !opened.value;
+    }
+
     return {
       opened,
+      onClick,
     };
   },
 };
@@ -48,12 +67,15 @@ export default {
 
 <style scoped lang="less">
 .documents-list-category-item {
-  display: flex;
-  align-items: center;
-  height: 48px;
-  padding: 0 16px;
-  border: 1px solid #dfe4ef;
-  background-color: #ffffff;
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 16px;
+    margin-top: -1px;
+    border: 1px solid #dfe4ef;
+    background-color: #ffffff;
+  }
 
   &__button {
     position: relative;
@@ -78,6 +100,11 @@ export default {
     &--opened svg {
       transform: translate(-50%, -50%) rotate(0deg);
     }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
   }
 
   &__title {
@@ -96,6 +123,10 @@ export default {
     font-size: 11px;
     font-weight: 400;
     color: #8e9cbb;
+  }
+
+  &__documents-list {
+    padding-left: 25px;
   }
 }
 </style>

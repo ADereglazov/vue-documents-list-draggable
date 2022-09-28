@@ -5,6 +5,7 @@
     <SearchInput class="app-search-input" />
     <DocumentsListCategory
       :list="documentsListCategory"
+      class="app-documents-category"
       @change-doc-list-category="onChangeDocumentsListCategory"
     />
     <DocumentsList
@@ -26,17 +27,36 @@ const documentsListCategory = ref([
     title: "Обязательные для всех",
     comment: "Документы, обязательные для всех сотрудников без исключения",
     indicators: ["#ff238d", "#ffb800", "#ff8d23"],
+    documents: [
+      {
+        title: "Тестовое задание кандидата",
+        comment:
+          "Россия, Белоруссия, Украина, администратор филиала, повар-сушист, повар-пиццмейкер, повар горячего цеха",
+        indicators: ["#0066ff", "#8e9cbb"],
+        required: false,
+      },
+      {
+        title: "Трудовой договор",
+        comment: "",
+        indicators: [],
+        required: false,
+      },
+    ],
   },
   {
     title: "Обязательные для трудоустройства",
     comment:
       "Документы, без которых невозможно трудоустройство человека на какую бы то ни было должность в компании вне зависимости от граж",
     indicators: [],
+    documents: [
+      { title: "Мед. книжка", comment: "", indicators: [], required: false },
+    ],
   },
   {
     title: "Специальные",
     comment: "",
     indicators: [],
+    documents: [],
   },
 ]);
 
@@ -73,5 +93,9 @@ function onChangeDocumentsList(e) {
 
 .app-search-input {
   margin-bottom: 35px;
+}
+
+.app-documents-category {
+  margin-bottom: 15px;
 }
 </style>
