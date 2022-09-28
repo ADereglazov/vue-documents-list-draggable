@@ -52,7 +52,7 @@ export default {
       type: Object,
     },
   },
-  setup(prop, { emit }) {
+  setup(props, { emit }) {
     const opened = ref(false);
 
     function onClick() {
@@ -60,7 +60,7 @@ export default {
     }
 
     function onChangeDocumentsList(e) {
-      opened.value = true;
+      opened.value = Boolean(e.length);
       emit("changeDocList", e);
     }
 
