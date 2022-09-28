@@ -3,20 +3,42 @@
   <section>
     <h2 class="visually-hidden">Операции со списком документов</h2>
     <SearchInput class="app-search-input" />
-    <DocumentsListCategory />
+    <DocumentsListCategory
+      :list="documentsListCategory"
+      @change-doc-list-category="onChangeDocumentsListCategory"
+    />
     <DocumentsList
       :list="documentsList"
-      @changeDocList="onChangeDocumentsList"
+      @change-doc-list="onChangeDocumentsList"
     />
   </section>
 </template>
 
 <script setup>
+import { ref } from "vue";
 import MainTools from "@/components/MainTools.vue";
 import SearchInput from "@/components/SearchInput.vue";
 import DocumentsListCategory from "@/components/DocumentsListCategory.vue";
 import DocumentsList from "@/components/DocumentsList.vue";
-import { ref } from "vue";
+
+const documentsListCategory = ref([
+  {
+    title: "Обязательные для всех",
+    comment: "Документы, обязательные для всех сотрудников без исключения",
+    indicators: ["#ff238d", "#ffb800", "#ff8d23"],
+  },
+  {
+    title: "Обязательные для трудоустройства",
+    comment:
+      "Документы, без которых невозможно трудоустройство человека на какую бы то ни было должность в компании вне зависимости от граж",
+    indicators: [],
+  },
+  {
+    title: "Специальные",
+    comment: "",
+    indicators: [],
+  },
+]);
 
 const documentsList = ref([
   {
@@ -34,6 +56,10 @@ const documentsList = ref([
   },
   { title: "Мед. книжка", comment: "", indicators: [], required: false },
 ]);
+
+function onChangeDocumentsListCategory(e) {
+  documentsListCategory.value = [...e];
+}
 
 function onChangeDocumentsList(e) {
   documentsList.value = [...e];
