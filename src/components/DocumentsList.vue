@@ -2,6 +2,7 @@
   <Draggable
     v-model="listModel"
     v-bind="dragOptions"
+    group="documents"
     item-key="title"
     handle=".handle"
     tag="ul"

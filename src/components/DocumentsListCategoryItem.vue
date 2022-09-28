@@ -23,7 +23,6 @@
       <DocumentsListTools />
     </div>
     <DocumentsList
-      v-show="opened"
       :list="element.documents"
       class="documents-list-category-item__documents-list"
     />
