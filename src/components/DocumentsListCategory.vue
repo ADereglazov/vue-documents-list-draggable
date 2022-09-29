@@ -110,8 +110,6 @@ export default {
     list-style: none;
 
     > li {
-      border: 1px solid #dfe4ef;
-      background-color: #ffffff;
       box-shadow: 0 3px 16px rgba(0, 102, 255, 0.7);
     }
   }

@@ -170,13 +170,6 @@ export default {
     list-style: none;
 
     > li {
-      position: relative;
-      display: flex;
-      align-items: center;
-      width: 100%;
-      height: 35px;
-      padding: 0 16px;
-      margin-top: -1px;
       border: 1px solid #dfe4ef;
       background-color: #ffffff;
       box-shadow: 0 3px 16px rgba(0, 102, 255, 0.7);
