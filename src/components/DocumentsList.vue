@@ -13,7 +13,10 @@
         :class="{ 'documents-list__item--collapsed': collapse }"
         class="documents-list__item"
       >
-        <h4 class="documents-list__item-title">{{ element.title }}</h4>
+        <h4
+          class="documents-list__item-title"
+          v-html="titleText(element.title)"
+        ></h4>
         <ColorIndicators
           :list="element.indicators"
           class="documents-list__item-indicators"
@@ -37,7 +40,7 @@ import DocumentsListTools from "@/components/DocumentsListTools.vue";
 export default {
   name: "DocumentsList",
   components: { Draggable, ColorIndicators, DocumentsListTools },
-  emits: ["changeDocList"],
+  emits: ["changeDocList", "found"],
   props: {
     list: {
       type: Array,
@@ -45,6 +48,10 @@ export default {
     collapse: {
       type: Boolean,
       default: false,
+    },
+    searchString: {
+      type: String,
+      default: "",
     },
   },
   setup(props, { emit }) {
@@ -59,9 +66,30 @@ export default {
       set: (val) => emit("changeDocList", val),
     });
 
+    function titleText(text) {
+      const match = text
+        .toLowerCase()
+        .indexOf(props.searchString.toLowerCase());
+
+      if (~match && props.searchString) {
+        emit("found", true);
+        const textSubstr = text.substring(
+          match,
+          props.searchString.length + match
+        );
+        return text.replace(
+          textSubstr,
+          "<span style='color: #ff238d'>" + textSubstr + "</span>"
+        );
+      }
+
+      return text;
+    }
+
     return {
       listModel,
       dragOptions,
+      titleText,
     };
   },
 };
@@ -78,12 +106,14 @@ export default {
     align-items: center;
     height: 35px;
     padding: 0 16px;
-    margin-top: -1px;
     border: 1px solid #dfe4ef;
     background-color: #ffffff;
+    opacity: 1;
+    transition: margin-top 200ms ease-in-out, opacity 500ms ease;
 
     &--collapsed {
-      display: none;
+      margin-top: -35px;
+      opacity: 0;
     }
 
     &.ghost {
