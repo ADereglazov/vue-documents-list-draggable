@@ -33,6 +33,7 @@
 
 <script>
 import { computed } from "vue";
+import modifyMatchText from "@/composables/modifyMatchText";
 import Draggable from "vuedraggable";
 import ColorIndicators from "@/components/ColorIndicators.vue";
 import DocumentsListTools from "@/components/DocumentsListTools.vue";
@@ -67,23 +68,14 @@ export default {
     });
 
     function titleText(text) {
-      const match = text
-        .toLowerCase()
-        .indexOf(props.searchString.toLowerCase());
+      const newText = modifyMatchText(text, props.searchString);
+      const match = Boolean(newText !== text && props.searchString);
 
-      if (~match && props.searchString) {
+      if (match) {
         emit("found", true);
-        const textSubstr = text.substring(
-          match,
-          props.searchString.length + match
-        );
-        return text.replace(
-          textSubstr,
-          "<span style='color: #ff238d'>" + textSubstr + "</span>"
-        );
       }
 
-      return text;
+      return newText;
     }
 
     return {

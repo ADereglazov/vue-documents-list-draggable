@@ -38,6 +38,7 @@
 
 <script>
 import { ref } from "vue";
+import modifyMatchText from "@/composables/modifyMatchText";
 import DocumentsListTools from "@/components/DocumentsListTools.vue";
 import ColorIndicators from "@/components/ColorIndicators.vue";
 import CollapseIcon from "@/assets/icons/collapse.svg";
@@ -74,28 +75,11 @@ export default {
     }
 
     function onFound(e) {
-      if (e) {
-        opened.value = e;
-      }
+      opened.value = e ? true : opened.value;
     }
 
     function titleText(text) {
-      const match = text
-        .toLowerCase()
-        .indexOf(props.searchString.toLowerCase());
-
-      if (~match) {
-        const textSubstr = text.substring(
-          match,
-          props.searchString.length + match
-        );
-        return text.replace(
-          textSubstr,
-          "<span style='color: #ff238d'>" + textSubstr + "</span>"
-        );
-      }
-
-      return text;
+      return modifyMatchText(text, props.searchString);
     }
 
     return {

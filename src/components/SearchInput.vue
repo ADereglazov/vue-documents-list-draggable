@@ -21,6 +21,7 @@
 
 <script>
 import { ref } from "vue";
+import throttle from "@/composables/throttle";
 import ClearIcon from "@/assets/icons/clear.svg";
 
 export default {
@@ -31,20 +32,6 @@ export default {
     const inputField = ref(null);
     const searchString = ref("");
     const throttledOnInput = throttle(onInput, 1000);
-
-    function throttle(callee, timeout) {
-      let timer = null;
-
-      return function perform(...args) {
-        if (timer) return;
-
-        timer = setTimeout(() => {
-          callee(...args);
-          clearTimeout(timer);
-          timer = null;
-        }, timeout);
-      };
-    }
 
     function onInput(e) {
       const value = e.target.value;
