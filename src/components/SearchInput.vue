@@ -33,7 +33,7 @@ export default {
 
     function onInput(e) {
       const value = e.target.value;
-      setTimeout(() => emit("inputSearchString", value), 1000);
+      emit("inputSearchString", value);
     }
 
     function onClickClear() {
