@@ -5,7 +5,6 @@
     <SearchInput class="app-search-input" />
     <DocumentsListCategory
       :list="documentsListCategory"
-      class="app-documents-category"
       @change-doc-list-category="onChangeDocumentsListCategory"
     />
     <DocumentsList
@@ -89,9 +88,5 @@ function onChangeDocumentsList(e) {
 
 .app-search-input {
   margin-bottom: 35px;
-}
-
-.app-documents-category {
-  margin-bottom: 15px;
 }
 </style>

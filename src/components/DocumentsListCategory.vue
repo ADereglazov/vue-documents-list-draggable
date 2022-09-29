@@ -6,6 +6,9 @@
     handle=".handle"
     tag="ul"
     class="documents-list-category"
+    @dragstart="dragStartHandler"
+    @dragend="dragEndHandler"
+    @drag="dragHandler"
   >
     <template #item="{ element, index }">
       <DocumentsListCategoryItem
@@ -14,10 +17,15 @@
       />
     </template>
   </Draggable>
+  <ul
+    class="documents-list-category__drag-preview"
+    :style="dragStyle"
+    ref="preview"
+  ></ul>
 </template>
 
 <script>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import Draggable from "vuedraggable";
 import DocumentsListCategoryItem from "@/components/DocumentsListCategoryItem.vue";
 
@@ -37,6 +45,17 @@ export default {
       ghostClass: "ghost",
     };
 
+    const preview = ref(null);
+    const dragPreview = ref(null);
+    const x = ref(0);
+    const y = ref(0);
+    const dragStyle = computed(() => {
+      return {
+        top: `${y.value}px`,
+        left: `${x.value}px`,
+      };
+    });
+
     const listModel = computed({
       get: () => [...props.list],
       set: (val) => emit("changeDocListCategory", val),
@@ -46,10 +65,31 @@ export default {
       listModel.value[index].documents = [...e];
     }
 
+    function dragStartHandler(e) {
+      dragPreview.value = e.target.cloneNode(true);
+      preview.value.appendChild(dragPreview.value);
+      e.dataTransfer.setDragImage(new Image(), 0, 0);
+    }
+
+    function dragEndHandler() {
+      dragPreview.value.remove();
+      dragPreview.value = null;
+    }
+
+    function dragHandler(e) {
+      x.value = e.pageX;
+      y.value = e.pageY;
+    }
+
     return {
       listModel,
       dragOptions,
+      dragStyle,
+      preview,
       onChangeDocumentsList,
+      dragStartHandler,
+      dragEndHandler,
+      dragHandler,
     };
   },
 };
@@ -58,7 +98,22 @@ export default {
 <style scoped lang="less">
 .documents-list-category {
   padding: 0;
-  margin: 0;
+  margin: 0 0 15px 0;
   list-style: none;
+
+  &__drag-preview {
+    position: absolute;
+    transform: translateX(-100%) translateY(-50%);
+    width: calc(100% - 60px);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    > li {
+      border: 1px solid #dfe4ef;
+      background-color: #ffffff;
+      box-shadow: 0 3px 16px rgba(0, 102, 255, 0.7);
+    }
+  }
 }
 </style>
