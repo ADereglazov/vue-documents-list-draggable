@@ -6,7 +6,7 @@
       class="search-input__input"
       type="text"
       placeholder="Поиск"
-      @input="onInput"
+      @input="throttledOnInput"
     />
     <button
       v-show="searchString"
@@ -30,6 +30,21 @@ export default {
   setup(props, { emit }) {
     const inputField = ref(null);
     const searchString = ref("");
+    const throttledOnInput = throttle(onInput, 1000);
+
+    function throttle(callee, timeout) {
+      let timer = null;
+
+      return function perform(...args) {
+        if (timer) return;
+
+        timer = setTimeout(() => {
+          callee(...args);
+          clearTimeout(timer);
+          timer = null;
+        }, timeout);
+      };
+    }
 
     function onInput(e) {
       const value = e.target.value;
@@ -45,7 +60,7 @@ export default {
     return {
       inputField,
       searchString,
-      onInput,
+      throttledOnInput,
       onClickClear,
     };
   },
