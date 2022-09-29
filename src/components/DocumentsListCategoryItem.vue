@@ -11,7 +11,10 @@
         <CollapseIcon />
       </button>
 
-      <h3 class="documents-list-category-item__title">{{ element.title }}</h3>
+      <h3
+        class="documents-list-category-item__title"
+        v-html="titleText(element.title)"
+      ></h3>
       <ColorIndicators
         :list="element.indicators"
         class="documents-list-category-item__indicators"
@@ -25,8 +28,10 @@
     <DocumentsList
       :list="element.documents"
       :collapse="!opened"
-      style-in-category="padding-left: 25px"
+      :search-string="searchString"
+      class="documents-list-category-item__documents-list"
       @change-doc-list="onChangeDocumentsList"
+      @found="onFound"
     />
   </li>
 </template>
@@ -51,6 +56,10 @@ export default {
     element: {
       type: Object,
     },
+    searchString: {
+      type: String,
+      default: "",
+    },
   },
   setup(props, { emit }) {
     const opened = ref(false);
@@ -64,10 +73,37 @@ export default {
       emit("changeDocList", e);
     }
 
+    function onFound(e) {
+      if (e) {
+        opened.value = e;
+      }
+    }
+
+    function titleText(text) {
+      const match = text
+        .toLowerCase()
+        .indexOf(props.searchString.toLowerCase());
+
+      if (~match) {
+        const textSubstr = text.substring(
+          match,
+          props.searchString.length + match
+        );
+        return text.replace(
+          textSubstr,
+          "<span style='color: #ff238d'>" + textSubstr + "</span>"
+        );
+      }
+
+      return text;
+    }
+
     return {
       opened,
+      onFound,
       onClick,
       onChangeDocumentsList,
+      titleText,
     };
   },
 };
@@ -76,11 +112,12 @@ export default {
 <style scoped lang="less">
 .documents-list-category-item {
   &__wrapper {
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     height: 48px;
     padding: 0 16px;
-    margin-top: -1px;
     border: 1px solid #dfe4ef;
     background-color: #ffffff;
   }

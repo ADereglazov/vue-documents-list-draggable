@@ -6,6 +6,7 @@
       class="search-input__input"
       type="text"
       placeholder="Поиск"
+      @input="onInput"
     />
     <button
       v-show="searchString"
@@ -25,18 +26,26 @@ import ClearIcon from "@/assets/icons/clear.svg";
 export default {
   name: "SearchInput",
   components: { ClearIcon },
-  setup() {
+  emits: ["inputSearchString"],
+  setup(props, { emit }) {
     const inputField = ref(null);
     const searchString = ref("");
+
+    function onInput(e) {
+      const value = e.target.value;
+      setTimeout(() => emit("inputSearchString", value), 1000);
+    }
 
     function onClickClear() {
       searchString.value = "";
       inputField.value.focus();
+      emit("inputSearchString", searchString.value);
     }
 
     return {
       inputField,
       searchString,
+      onInput,
       onClickClear,
     };
   },

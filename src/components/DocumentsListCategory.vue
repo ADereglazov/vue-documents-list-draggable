@@ -13,6 +13,7 @@
     <template #item="{ element, index }">
       <DocumentsListCategoryItem
         :element="element"
+        :search-string="searchString"
         @change-doc-list="onChangeDocumentsList($event, index)"
       />
     </template>
@@ -36,6 +37,10 @@ export default {
   props: {
     list: {
       type: Array,
+    },
+    searchString: {
+      type: String,
+      default: "",
     },
   },
   setup(props, { emit }) {

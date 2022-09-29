@@ -2,13 +2,19 @@
   <MainTools class="app-main-tools" />
   <section>
     <h2 class="visually-hidden">Операции со списком документов</h2>
-    <SearchInput class="app-search-input" />
+    <SearchInput
+      class="app-search-input"
+      @input-search-string="onInputSearchString"
+    />
     <DocumentsListCategory
       :list="documentsListCategory"
+      :search-string="searchString"
+      class="app-documents-category"
       @change-doc-list-category="onChangeDocumentsListCategory"
     />
     <DocumentsList
       :list="documentsList"
+      :search-string="searchString"
       @change-doc-list="onChangeDocumentsList"
     />
   </section>
@@ -71,6 +77,12 @@ const documentsList = ref([
   },
   { title: "Мед. книжка", comment: "", indicators: [], required: false },
 ]);
+
+let searchString = ref("");
+
+function onInputSearchString(e) {
+  searchString.value = e;
+}
 
 function onChangeDocumentsListCategory(e) {
   documentsListCategory.value = [...e];
