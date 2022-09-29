@@ -6,7 +6,11 @@
     item-key="title"
     handle=".handle"
     tag="ul"
+    :style="styleInCategory"
     class="documents-list"
+    @dragstart="dragStartHandler"
+    @dragend="dragEndHandler"
+    @drag="dragHandler"
   >
     <template #item="{ element }">
       <li
@@ -26,10 +30,15 @@
       </li>
     </template>
   </Draggable>
+  <ul
+    class="documents-list__drag-preview"
+    :style="dragStyle"
+    ref="preview"
+  ></ul>
 </template>
 
 <script>
-import { computed } from "vue";
+import { ref, computed } from "vue";
 import Draggable from "vuedraggable";
 import ColorIndicators from "@/components/ColorIndicators.vue";
 import DocumentsListTools from "@/components/DocumentsListTools.vue";
@@ -46,6 +55,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    styleInCategory: {
+      type: String,
+      default: "",
+    },
   },
   setup(props, { emit }) {
     const dragOptions = {
@@ -54,14 +67,46 @@ export default {
       ghostClass: "ghost",
     };
 
+    const preview = ref(null);
+    const dragPreview = ref(null);
+    const x = ref(0);
+    const y = ref(0);
+    const dragStyle = computed(() => {
+      return {
+        top: `${y.value}px`,
+        left: `${x.value}px`,
+      };
+    });
+
     const listModel = computed({
       get: () => [...props.list],
       set: (val) => emit("changeDocList", val),
     });
 
+    function dragStartHandler(e) {
+      dragPreview.value = e.target.cloneNode(true);
+      preview.value.appendChild(dragPreview.value);
+      e.dataTransfer.setDragImage(new Image(), 0, 0);
+    }
+
+    function dragEndHandler() {
+      dragPreview.value.remove();
+      dragPreview.value = null;
+    }
+
+    function dragHandler(e) {
+      x.value = e.pageX;
+      y.value = e.pageY;
+    }
+
     return {
       listModel,
       dragOptions,
+      dragStyle,
+      preview,
+      dragStartHandler,
+      dragEndHandler,
+      dragHandler,
     };
   },
 };
@@ -114,6 +159,28 @@ export default {
     font-size: 11px;
     font-weight: 400;
     color: #8e9cbb;
+  }
+
+  &__drag-preview {
+    position: absolute;
+    transform: translateX(-100%) translateY(-50%);
+    width: calc(100% - 60px);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    > li {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 35px;
+      padding: 0 16px;
+      margin-top: -1px;
+      border: 1px solid #dfe4ef;
+      background-color: #ffffff;
+      box-shadow: 0 3px 16px rgba(0, 102, 255, 0.7);
+    }
   }
 }
 </style>

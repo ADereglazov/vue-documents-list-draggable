@@ -25,7 +25,7 @@
     <DocumentsList
       :list="element.documents"
       :collapse="!opened"
-      class="documents-list-category-item__documents-list"
+      style-in-category="padding-left: 25px"
       @change-doc-list="onChangeDocumentsList"
     />
   </li>
@@ -131,10 +131,6 @@ export default {
     font-size: 11px;
     font-weight: 400;
     color: #8e9cbb;
-  }
-
-  &__documents-list {
-    padding-left: 25px;
   }
 }
 </style>
