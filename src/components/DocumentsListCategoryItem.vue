@@ -29,6 +29,7 @@
       :list="element.documents"
       :collapse="!opened"
       :search-string="searchString"
+      style-in-category="padding-left: 25px"
       class="documents-list-category-item__documents-list"
       @change-doc-list="onChangeDocumentsList"
       @found="onFound"

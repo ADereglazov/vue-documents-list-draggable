@@ -108,6 +108,7 @@ export default {
 
   &__drag-preview {
     position: absolute;
+    z-index: 1;
     transform: translateX(-100%) translateY(-50%);
     width: calc(100% - 60px);
     padding: 0;
