@@ -101,7 +101,7 @@ export default {
     border: 1px solid #dfe4ef;
     background-color: #ffffff;
     opacity: 1;
-    transition: margin-top 200ms ease-in-out, opacity 500ms ease;
+    transition: margin-top 300ms ease-in-out, opacity 250ms ease 50ms;
 
     &--collapsed {
       margin-top: -35px;

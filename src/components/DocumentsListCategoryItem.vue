@@ -108,6 +108,7 @@ export default {
 
   &__button {
     position: relative;
+    flex-shrink: 0;
     width: 22px;
     height: 22px;
     padding: 0;
