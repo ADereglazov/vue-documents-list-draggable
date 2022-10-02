@@ -23,7 +23,7 @@
         {{ element.comment }}
       </p>
 
-      <DocumentsListTools />
+      <DocumentsListTools class="documents-list-category-item__tools" />
     </div>
     <DocumentsList
       :list="element.documents"
@@ -97,13 +97,16 @@ export default {
 .documents-list-category-item {
   &__wrapper {
     position: relative;
-    z-index: 1;
     display: flex;
     align-items: center;
     height: 48px;
     padding: 0 16px;
     border: 1px solid #dfe4ef;
     background-color: #ffffff;
+
+    & > * {
+      z-index: 1;
+    }
   }
 
   &__button {
@@ -153,6 +156,10 @@ export default {
     font-size: 11px;
     font-weight: 400;
     color: #8e9cbb;
+  }
+
+  &__tools {
+    height: 100%;
   }
 
   &__documents-list {
