@@ -23,13 +23,12 @@
         {{ element.comment }}
       </p>
 
-      <DocumentsListTools />
+      <DocumentsListTools class="documents-list-category-item__tools" />
     </div>
     <DocumentsList
       :list="element.documents"
       :collapse="!opened"
       :search-string="searchString"
-      style-in-category="padding-left: 25px"
       class="documents-list-category-item__documents-list"
       @change-doc-list="onChangeDocumentsList"
       @found="onFound"
@@ -39,6 +38,7 @@
 
 <script>
 import { ref } from "vue";
+import modifyMatchText from "@/composables/modifyMatchText";
 import DocumentsListTools from "@/components/DocumentsListTools.vue";
 import ColorIndicators from "@/components/ColorIndicators.vue";
 import CollapseIcon from "@/assets/icons/collapse.svg";
@@ -75,28 +75,11 @@ export default {
     }
 
     function onFound(e) {
-      if (e) {
-        opened.value = e;
-      }
+      opened.value = e ? true : opened.value;
     }
 
     function titleText(text) {
-      const match = text
-        .toLowerCase()
-        .indexOf(props.searchString.toLowerCase());
-
-      if (~match) {
-        const textSubstr = text.substring(
-          match,
-          props.searchString.length + match
-        );
-        return text.replace(
-          textSubstr,
-          "<span style='color: #ff238d'>" + textSubstr + "</span>"
-        );
-      }
-
-      return text;
+      return modifyMatchText(text, props.searchString);
     }
 
     return {
@@ -114,17 +97,21 @@ export default {
 .documents-list-category-item {
   &__wrapper {
     position: relative;
-    z-index: 1;
     display: flex;
     align-items: center;
     height: 48px;
     padding: 0 16px;
     border: 1px solid #dfe4ef;
     background-color: #ffffff;
+
+    & > * {
+      z-index: 1;
+    }
   }
 
   &__button {
     position: relative;
+    flex-shrink: 0;
     width: 22px;
     height: 22px;
     padding: 0;
@@ -169,6 +156,14 @@ export default {
     font-size: 11px;
     font-weight: 400;
     color: #8e9cbb;
+  }
+
+  &__tools {
+    height: 100%;
+  }
+
+  & &__documents-list {
+    margin-left: 25px;
   }
 }
 </style>

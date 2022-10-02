@@ -66,6 +66,8 @@ export default {
     cursor: pointer;
     outline: none;
 
+    transition: box-shadow 200ms ease-in-out;
+
     &:hover,
     &:focus {
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);

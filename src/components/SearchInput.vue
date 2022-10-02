@@ -6,7 +6,7 @@
       class="search-input__input"
       type="text"
       placeholder="Поиск"
-      @input="onInput"
+      @input="throttledOnInput"
     />
     <button
       v-show="searchString"
@@ -21,6 +21,7 @@
 
 <script>
 import { ref } from "vue";
+import throttle from "@/composables/throttle";
 import ClearIcon from "@/assets/icons/clear.svg";
 
 export default {
@@ -30,10 +31,11 @@ export default {
   setup(props, { emit }) {
     const inputField = ref(null);
     const searchString = ref("");
+    const throttledOnInput = throttle(onInput, 1000);
 
     function onInput(e) {
       const value = e.target.value;
-      setTimeout(() => emit("inputSearchString", value), 1000);
+      emit("inputSearchString", value);
     }
 
     function onClickClear() {
@@ -45,7 +47,7 @@ export default {
     return {
       inputField,
       searchString,
-      onInput,
+      throttledOnInput,
       onClickClear,
     };
   },
