@@ -162,8 +162,8 @@ export default {
     height: 100%;
   }
 
-  &__documents-list {
-    padding-left: 25px;
+  & &__documents-list {
+    margin-left: 25px;
   }
 }
 </style>
