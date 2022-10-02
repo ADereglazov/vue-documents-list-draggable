@@ -7,7 +7,7 @@
     tag="ul"
     class="documents-list-category"
     @dragstart="dragStartHandler"
-    @dragend="dragEndHandler"
+    @end="dragEndHandler"
     @drag="dragHandler"
   >
     <template #item="{ element, index }">

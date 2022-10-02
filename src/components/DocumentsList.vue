@@ -8,7 +8,7 @@
     tag="ul"
     class="documents-list"
     @dragstart="dragStartHandler"
-    @dragend="dragEndHandler"
+    @end="dragEndHandler"
     @drag="dragHandler"
   >
     <template #item="{ element }">
@@ -41,6 +41,7 @@
 
 <script>
 import { ref, computed } from "vue";
+import modifyMatchText from "@/composables/modifyMatchText";
 import Draggable from "vuedraggable";
 import ColorIndicators from "@/components/ColorIndicators.vue";
 import DocumentsListTools from "@/components/DocumentsListTools.vue";
