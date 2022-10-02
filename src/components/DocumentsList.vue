@@ -89,6 +89,7 @@ export default {
     function dragStartHandler(e) {
       dragPreview.value = e.target.cloneNode(true);
       preview.value.appendChild(dragPreview.value);
+      preview.value.style.zIndex = 2;
       e.dataTransfer.setDragImage(new Image(), 0, 0);
     }
 
