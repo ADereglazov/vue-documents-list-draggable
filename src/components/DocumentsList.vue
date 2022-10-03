@@ -1,42 +1,44 @@
 <template>
-  <Draggable
-    v-model="listModel"
-    v-bind="dragOptions"
-    group="documents"
-    item-key="title"
-    handle=".handle"
-    tag="ul"
-    class="documents-list"
-    @dragstart="dragStartHandler"
-    @end="dragEndHandler"
-    @drag="dragHandler"
-  >
-    <template #item="{ element }">
-      <li
-        :class="{ 'documents-list__item--collapsed': collapse }"
-        class="documents-list__item"
-      >
-        <h4
-          class="documents-list__item-title"
-          v-html="titleText(element.title)"
-        ></h4>
-        <ColorIndicators
-          :list="element.indicators"
-          class="documents-list__item-indicators"
-        />
-        <p v-if="element.required" class="documents-list__item-required">
-          Обязательный
-        </p>
-        <p class="documents-list__item-comment">{{ element.comment }}</p>
-        <DocumentsListTools />
-      </li>
-    </template>
-  </Draggable>
-  <ul
-    class="documents-list__drag-preview"
-    :style="dragStyle"
-    ref="preview"
-  ></ul>
+  <div class="documents-list">
+    <Draggable
+      v-model="listModel"
+      v-bind="dragOptions"
+      group="documents"
+      item-key="title"
+      handle=".handle"
+      tag="ul"
+      class="documents-list__list"
+      @dragstart="dragStartHandler"
+      @end="dragEndHandler"
+      @drag="dragHandler"
+    >
+      <template #item="{ element }">
+        <li
+          :class="{ 'documents-list__item--collapsed': collapse }"
+          class="documents-list__list-item"
+        >
+          <h4
+            class="documents-list__item-title"
+            v-html="titleText(element.title)"
+          ></h4>
+          <ColorIndicators
+            :list="element.indicators"
+            class="documents-list__item-indicators"
+          />
+          <p v-if="element.required" class="documents-list__item-required">
+            Обязательный
+          </p>
+          <p class="documents-list__item-comment">{{ element.comment }}</p>
+          <DocumentsListTools />
+        </li>
+      </template>
+    </Draggable>
+    <ul
+      class="documents-list__drag-preview"
+      :style="dragStyle"
+      ref="preview"
+    ></ul>
+  </div>
 </template>
 
 <script>
@@ -94,7 +96,9 @@ export default {
     }
 
     function dragEndHandler() {
-      dragPreview.value.remove();
+      if (dragPreview.value) {
+        dragPreview.value.remove();
+      }
       dragPreview.value = null;
     }
 
@@ -130,11 +134,13 @@ export default {
 
 <style scoped lang="less">
 .documents-list {
-  padding: 0;
-  margin: 0;
-  list-style: none;
+  &__list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
 
-  &__item {
+  &__list-item {
     display: flex;
     align-items: center;
     height: 35px;

@@ -1,28 +1,30 @@
 <template>
-  <Draggable
-    v-model="listModel"
-    v-bind="dragOptions"
-    item-key="title"
-    handle=".handle"
-    tag="ul"
-    class="documents-list-category"
-    @dragstart="dragStartHandler"
-    @end="dragEndHandler"
-    @drag="dragHandler"
-  >
-    <template #item="{ element, index }">
-      <DocumentsListCategoryItem
-        :element="element"
-        :search-string="searchString"
-        @change-doc-list="onChangeDocumentsList($event, index)"
-      />
-    </template>
-  </Draggable>
-  <ul
-    class="documents-list-category__drag-preview"
-    :style="dragStyle"
-    ref="preview"
-  ></ul>
+  <div class="documents-list-category">
+    <Draggable
+      v-model="listModel"
+      v-bind="dragOptions"
+      item-key="title"
+      handle=".handle"
+      tag="ul"
+      class="documents-list-category__list"
+      @dragstart="dragStartHandler"
+      @end="dragEndHandler"
+      @drag="dragHandler"
+    >
+      <template #item="{ element, index }">
+        <DocumentsListCategoryItem
+          :element="element"
+          :search-string="searchString"
+          @change-doc-list="onChangeDocumentsList($event, index)"
+        />
+      </template>
+    </Draggable>
+    <ul
+      class="documents-list-category__drag-preview"
+      :style="dragStyle"
+      ref="preview"
+    ></ul>
+  </div>
 </template>
 
 <script>
@@ -77,7 +79,9 @@ export default {
     }
 
     function dragEndHandler() {
-      dragPreview.value.remove();
+      if (dragPreview.value) {
+        dragPreview.value.remove();
+      }
       dragPreview.value = null;
     }
 
@@ -102,9 +106,11 @@ export default {
 
 <style scoped lang="less">
 .documents-list-category {
-  padding: 0;
-  margin: 0 0 15px 0;
-  list-style: none;
+  &__list {
+    padding: 0;
+    margin: 0 0 15px 0;
+    list-style: none;
+  }
 
   &__drag-preview {
     position: absolute;
