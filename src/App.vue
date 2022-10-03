@@ -78,7 +78,7 @@ const documentsList = ref([
   { title: "Мед. книжка", comment: "", indicators: [], required: false },
 ]);
 
-let searchString = ref("");
+const searchString = ref("");
 
 function onInputSearchString(e) {
   searchString.value = e;
