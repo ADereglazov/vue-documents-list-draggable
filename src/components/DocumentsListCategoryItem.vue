@@ -102,8 +102,8 @@ export default {
     align-items: center;
     height: 48px;
     padding: 0 16px;
-    border: 1px solid #dfe4ef;
-    background-color: #ffffff;
+    border: 1px solid @light-grey1;
+    background-color: @white;
 
     & > * {
       z-index: 1;
@@ -117,9 +117,9 @@ export default {
     height: 22px;
     padding: 0;
     margin-right: 15px;
-    border: 1px solid #d3d8df;
+    border: 1px solid @light-grey2;
     border-radius: 50%;
-    background: #ffffff;
+    background: @white;
     cursor: pointer;
 
     svg {
@@ -145,7 +145,7 @@ export default {
     margin: 0 15px 0 0;
     font-size: 15px;
     font-weight: 500;
-    color: #000000;
+    color: @black;
   }
 
   &__indicators {
@@ -156,7 +156,7 @@ export default {
     margin: 0 auto 0 0;
     font-size: 11px;
     font-weight: 400;
-    color: #8e9cbb;
+    color: @middle-grey;
   }
 
   &__tools {

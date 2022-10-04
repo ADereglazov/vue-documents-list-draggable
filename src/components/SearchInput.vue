@@ -86,17 +86,17 @@ export default {
     font-size: 15px;
     font-weight: 400;
     line-height: normal;
-    color: #000000;
+    color: @black;
     outline: none;
 
     &:focus {
-      border-bottom-color: #0066ff;
+      border-bottom-color: @blue;
     }
 
     &::placeholder {
       font-size: 15px;
       line-height: normal;
-      color: #8e9cbb;
+      color: @middle-grey;
     }
   }
 

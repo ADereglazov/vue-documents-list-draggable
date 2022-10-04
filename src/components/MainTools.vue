@@ -64,8 +64,8 @@ export default {
     min-height: 30px;
     padding: 8px 20px 8px 35px;
 
-    background: #ffffff;
-    border: 1px solid #d3d8df;
+    background: @white;
+    border: 1px solid @light-grey2;
     border-radius: 15px;
 
     font-size: 12px;
@@ -79,7 +79,7 @@ export default {
 
     &:hover,
     &:focus {
-      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 4px 4px @black-opacity-025;
     }
 
     &:active {

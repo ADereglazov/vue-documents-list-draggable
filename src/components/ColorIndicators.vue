@@ -39,8 +39,8 @@ export default {
 
     &:hover,
     &:focus {
-      border: 1px solid #000000;
-      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+      border: 1px solid @black;
+      box-shadow: 0 4px 4px @black-opacity-025;
     }
   }
 

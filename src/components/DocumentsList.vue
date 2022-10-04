@@ -98,8 +98,8 @@ export default {
     align-items: center;
     height: 35px;
     padding: 0 16px;
-    border: 1px solid #dfe4ef;
-    background-color: #ffffff;
+    border: 1px solid @light-grey1;
+    background-color: @white;
     opacity: 1;
     transition: margin-top 300ms ease-in-out, opacity 250ms ease 50ms;
 
@@ -117,7 +117,7 @@ export default {
     margin: 0 15px 0 0;
     font-size: 13px;
     font-weight: 400;
-    color: #000000;
+    color: @black;
   }
 
   &__item-indicators {
@@ -128,14 +128,14 @@ export default {
     margin-right: 15px;
     font-size: 11px;
     font-weight: 400;
-    color: #ff238d;
+    color: @pink;
   }
 
   &__item-comment {
     margin: 0 auto 0 0;
     font-size: 11px;
     font-weight: 400;
-    color: #8e9cbb;
+    color: @middle-grey;
   }
 }
 </style>
