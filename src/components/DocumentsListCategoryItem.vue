@@ -6,6 +6,7 @@
         :class="{ 'documents-list-category-item__button--opened': opened }"
         type="button"
         :disabled="!element.documents.length"
+        aria-label="Развернуть/свернуть содержимое"
         @click="onClick"
       >
         <CollapseIcon />

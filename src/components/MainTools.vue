@@ -5,14 +5,23 @@
       <button
         type="button"
         class="main-tools__button main-tools__button--bookmark"
+        aria-label="Добавить в избранное"
       >
         <BookmarkIcon />
       </button>
-      <button type="button" class="main-tools__button">
+      <button
+        type="button"
+        class="main-tools__button"
+        aria-label="Добавить новый тип"
+      >
         <PlusIcon />
         Новый тип
       </button>
-      <button type="button" class="main-tools__button">
+      <button
+        type="button"
+        class="main-tools__button"
+        aria-label="Добавить новый документ"
+      >
         <PlusIcon />
         Новый документ
       </button>

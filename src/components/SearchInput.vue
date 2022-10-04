@@ -12,6 +12,7 @@
       v-show="searchString"
       class="search-input__button"
       type="button"
+      aria-label="Очистить строку поиска"
       @click="onClickClear"
     >
       <ClearIcon />
