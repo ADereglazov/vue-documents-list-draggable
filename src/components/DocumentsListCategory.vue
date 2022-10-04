@@ -62,8 +62,6 @@ export default {
 
 <style scoped lang="less">
 .documents-list-category {
-  padding: 0;
-  margin: 0;
-  list-style: none;
+  .list-reset();
 }
 </style>

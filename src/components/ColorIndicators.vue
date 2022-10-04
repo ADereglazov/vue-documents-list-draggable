@@ -24,9 +24,7 @@ export default {
 <style scoped lang="less">
 .color-indicators {
   display: flex;
-  padding: 0;
-  margin: 0;
-  list-style: none;
+  .list-reset();
 
   &__item {
     display: block;

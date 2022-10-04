@@ -89,9 +89,7 @@ export default {
 
 <style scoped lang="less">
 .documents-list {
-  padding: 0;
-  margin: 0;
-  list-style: none;
+  .list-reset();
 
   &__item {
     display: flex;
