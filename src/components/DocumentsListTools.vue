@@ -1,12 +1,24 @@
 <template>
   <div class="documents-list-tools">
-    <button class="documents-list-tools__button" type="button">
+    <button
+      class="documents-list-tools__button"
+      type="button"
+      aria-label="Редактировать"
+    >
       <EditIcon />
     </button>
-    <button class="documents-list-tools__button" type="button">
+    <button
+      class="documents-list-tools__button"
+      type="button"
+      aria-label="Удалить"
+    >
       <DeleteIcon />
     </button>
-    <button class="documents-list-tools__button handle" type="button">
+    <button
+      class="documents-list-tools__button handle"
+      type="button"
+      aria-label="Переместить"
+    >
       <MoveIcon />
     </button>
   </div>
