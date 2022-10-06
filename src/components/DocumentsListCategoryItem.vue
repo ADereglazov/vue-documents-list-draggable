@@ -75,7 +75,7 @@ export default {
     }
 
     function onFound(e) {
-      opened.value = e ? true : opened.value;
+      opened.value = e || opened.value;
     }
 
     function titleText(text) {
