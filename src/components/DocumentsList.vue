@@ -134,7 +134,9 @@ export default {
 
 <style scoped lang="less">
 .documents-list {
-  .list-reset();
+  &__list {
+    .list-reset();
+  }
 
   &__list-item {
     display: flex;
@@ -190,8 +192,8 @@ export default {
     list-style: none;
 
     > li {
-      border: 1px solid #dfe4ef;
-      background-color: #ffffff;
+      border: 1px solid @light-grey1;
+      background-color: @white;
       box-shadow: 0 3px 16px rgba(0, 102, 255, 0.7);
     }
   }

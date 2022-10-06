@@ -101,4 +101,8 @@ function onChangeDocumentsList(e) {
 .app-search-input {
   margin-bottom: 35px;
 }
+
+.app-documents-category {
+  margin-bottom: 15px;
+}
 </style>

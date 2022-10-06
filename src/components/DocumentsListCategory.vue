@@ -106,7 +106,9 @@ export default {
 
 <style scoped lang="less">
 .documents-list-category {
-  .list-reset();
+  &__list {
+    .list-reset();
+  }
 
   &__drag-preview {
     position: absolute;
