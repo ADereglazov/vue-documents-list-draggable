@@ -106,11 +106,7 @@ export default {
 
 <style scoped lang="less">
 .documents-list-category {
-  &__list {
-    padding: 0;
-    margin: 0 0 15px 0;
-    list-style: none;
-  }
+  .list-reset();
 
   &__drag-preview {
     position: absolute;

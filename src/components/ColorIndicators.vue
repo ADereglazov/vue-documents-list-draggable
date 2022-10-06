@@ -24,9 +24,7 @@ export default {
 <style scoped lang="less">
 .color-indicators {
   display: flex;
-  padding: 0;
-  margin: 0;
-  list-style: none;
+  .list-reset();
 
   &__item {
     display: block;
@@ -39,8 +37,8 @@ export default {
 
     &:hover,
     &:focus {
-      border: 1px solid #000000;
-      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+      border: 1px solid @black;
+      box-shadow: 0 4px 4px @black-opacity-025;
     }
   }
 

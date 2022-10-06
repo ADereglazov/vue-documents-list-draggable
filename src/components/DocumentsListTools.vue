@@ -45,7 +45,7 @@ export default {
     border: none;
     background: none;
 
-    color: #8e9cbb;
+    color: @middle-grey;
     cursor: pointer;
 
     &:active {
@@ -60,6 +60,6 @@ export default {
 
 .handle:active {
   opacity: 1;
-  color: #0066ff;
+  color: @blue;
 }
 </style>
