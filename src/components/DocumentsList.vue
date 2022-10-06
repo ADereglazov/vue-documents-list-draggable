@@ -14,7 +14,7 @@
     >
       <template #item="{ element }">
         <li
-          :class="{ 'documents-list__item--collapsed': collapse }"
+          :class="{ 'documents-list__list-item--collapsed': collapse }"
           class="documents-list__list-item"
         >
           <h4
