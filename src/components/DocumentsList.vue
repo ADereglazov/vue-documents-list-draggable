@@ -33,7 +33,7 @@
 
 <script>
 import { computed } from "vue";
-import modifyMatchText from "@/composables/modifyMatchText";
+import modifyMatchText from "@/utils/modifyMatchText";
 import Draggable from "vuedraggable";
 import ColorIndicators from "@/components/ColorIndicators.vue";
 import DocumentsListTools from "@/components/DocumentsListTools.vue";

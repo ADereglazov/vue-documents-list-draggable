@@ -22,7 +22,7 @@
 
 <script>
 import { ref } from "vue";
-import throttle from "@/composables/throttle";
+import throttle from "@/utils/throttle";
 import ClearIcon from "@/assets/icons/clear.svg";
 
 export default {

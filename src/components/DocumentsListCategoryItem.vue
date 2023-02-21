@@ -39,7 +39,7 @@
 
 <script>
 import { ref } from "vue";
-import modifyMatchText from "@/composables/modifyMatchText";
+import modifyMatchText from "@/utils/modifyMatchText";
 import DocumentsListTools from "@/components/DocumentsListTools.vue";
 import ColorIndicators from "@/components/ColorIndicators.vue";
 import CollapseIcon from "@/assets/icons/collapse.svg";
